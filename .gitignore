@@ -1,0 +1,6 @@
+#ignore the folder "prova"
+/prova
+
+#ignore all the object files
+*.o
+shell2
