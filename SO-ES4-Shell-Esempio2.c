@@ -16,6 +16,7 @@ int main() {
 		printf("Shell> ");
 		//scanf("%127s\n", buffer); // scanf non legge l'intera stringa se contiene spazi
 		fgets(buffer, 127, stdin);
+		if(buffer[0] == '\n'){continue;}
 		buffer[strlen(buffer) - 1] = '\0';
 
 		printf("buffer='%s'\n", buffer);
