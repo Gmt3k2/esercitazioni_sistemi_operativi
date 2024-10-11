@@ -47,7 +47,7 @@ int main() {
 		while(args[i] != NULL){
 			if(strcmp(args[i], "&") == 0){
 				isBackgorund = 1;
-				args[i] == NULL;
+				args[i] = NULL;
 			}
 			i++;
 		}
@@ -65,11 +65,12 @@ int main() {
 			perror("Errore: exec non riuscita!");
 		}
 		else{
-			if(isBackgorund == 0){
-				printf("Aspetto il figlio (%d)\n", pid);
-				pid = wait(NULL);
-				printf("Figlio (%d) terminato\n", pid);
+			if(isBackgorund == 1){
+				continue;
 			}
+			printf("Aspetto il figlio (%d)\n", pid);
+			pid = wait(NULL);
+			printf("Figlio (%d) terminato\n", pid);
 		}
 	}
 
