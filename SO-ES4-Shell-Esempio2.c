@@ -15,6 +15,7 @@ int main() {
 		int isBackgorund = 0;
 		printf("Shell> ");
 		//scanf("%127s\n", buffer); // scanf non legge l'intera stringa se contiene spazi
+		fflush(stdin);
 		fgets(buffer, 127, stdin);
 		if(buffer[0] == '\n'){continue;}
 		buffer[strlen(buffer) - 1] = '\0';
@@ -51,7 +52,7 @@ int main() {
 			}
 			i++;
 		}
-		
+		printf("la flag del background è: %d\n", isBackgorund);
 		pid = fork();
 
 		if(pid == -1){
