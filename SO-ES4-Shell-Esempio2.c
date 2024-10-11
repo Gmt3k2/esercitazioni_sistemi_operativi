@@ -3,13 +3,13 @@
 #include <string.h>
 #include <sys/wait.h>
 
-
 int main() {
 	char buffer[128];
 	pid_t pid;
 	int n;
 	char* args[10];
 	char* token;
+	int isBackgorund = 0;
 
 	while(1){
 
@@ -31,10 +31,9 @@ int main() {
 		while(token != NULL && n<10) {
 
 			token = strtok(NULL, " ");
-
 			args[n] = token;
+			
 			printf("ARG %d: '%s'\n", n, args[n]);
-
 			n++;
 		}
 
@@ -44,6 +43,16 @@ int main() {
 			return 0;//exit(0);
 		}
 
+		int i = 0;
+		while(args[i] != NULL){
+			if(strcmp(args[i], "&") == 0){
+				isBackgorund = 1;
+				args[i] == NULL;
+			}
+			i++;
+		}
+		
+		printf("la flag del background è: %d\n", isBackgorund);
 
 		pid = fork();
 
