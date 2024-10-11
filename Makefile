@@ -1,12 +1,12 @@
 clean:
-	rm shell.o shell
+	rm shell2
 
 all: shell
 
-shell: shell.o
+shell: SO-ES4-Shell-Esempio2.o
 	@echo "producing exe"
-	@gcc -o shell shell.o
+	@gcc -o shell SO-ES4-Shell-Esempio2.o
 
-shell.o: shell.c
+shell.o: SO-ES4-Shell-Esempio2.c
 	@echo "compiling"
-	@gcc -c shell.c
+	@gcc -c SO-ES4-Shell-Esempio2.c
