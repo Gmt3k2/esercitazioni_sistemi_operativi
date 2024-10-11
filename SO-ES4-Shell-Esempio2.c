@@ -9,10 +9,10 @@ int main() {
 	int n;
 	char* args[10];
 	char* token;
-	int isBackgorund = 0;
-
+	
 	while(1){
 
+		int isBackgorund = 0;
 		printf("Shell> ");
 		//scanf("%127s\n", buffer); // scanf non legge l'intera stringa se contiene spazi
 		fgets(buffer, 127, stdin);
@@ -52,8 +52,6 @@ int main() {
 			i++;
 		}
 		
-		printf("la flag del background è: %d\n", isBackgorund);
-
 		pid = fork();
 
 		if(pid == -1){
@@ -67,9 +65,11 @@ int main() {
 			perror("Errore: exec non riuscita!");
 		}
 		else{
-			printf("Aspetto il figlio (%d)\n", pid);
-			pid = wait(NULL);
-			printf("Figlio (%d) terminato\n", pid);
+			if(isBackgorund == 0){
+				printf("Aspetto il figlio (%d)\n", pid);
+				pid = wait(NULL);
+				printf("Figlio (%d) terminato\n", pid);
+			}
 		}
 	}
 
