@@ -2,6 +2,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <sys/wait.h>
+#include <stdlib.h>
 
 int main() {
 	char buffer[128];
@@ -18,14 +19,14 @@ int main() {
 		fflush(stdin);
 		fgets(buffer, 127, stdin);
 		if(buffer[0] == '\n'){continue;}
-		buffer[strlen(buffer) - 1] = '\0';
+		buffer[strlen(buffer) - 1] = '\0'; //terminal char at the end of the buffer
 
 		printf("buffer='%s'\n", buffer);
 
 
 		token = strtok(buffer, " ");
-
 		args[0] = token;
+		
 		printf("ARG 0: '%s'\n", args[0]);
 
 		n = 1;
@@ -38,7 +39,7 @@ int main() {
 			n++;
 		}
 
-		args[9] = (char *)0;
+		args[9] = (char *)0; //terminating char at the end of commands
 
 		if(!strcmp(args[0], "exit")){
 			return 0;//exit(0);
@@ -53,34 +54,38 @@ int main() {
 			i++;
 		}
 		printf("la flag del background è: %d\n", isBackgorund);
+		
 		pid = fork();
 
 		if(pid == -1){
-			//printf("Errore: fork non riuscita!\n");
-			perror("Errore: fork non riuscita!");
+			perror("Errore: fork non riuscita!\n");
 			return 0;//exit(0);
 		}
 		else if(pid == 0){
-
-			pid_t pid1 = fork();
-
-			if (pid1 == 0){
-				//vado a fare la exe
+			//if I don't have the necessity of backgorund I'm going to keep it simple and not create another process
+			if(isBackgorund == 0){
 				execvp(args[0], args);
 			}
-			else if(pid1 > 0){
-				exit();
-			}
-			else{
-				perror("Errore nella creazione del processo nipote\n");
+
+			else if(isBackgorund == 1){
+				pid_t pid1 = fork();
+
+				if(pid1 > 0){
+					//the father gets killed instantly ad nephew adopted by init
+					exit(1);
+				}
+				else if(pid1 == 0){
+					execvp(args[0], args);
+				}
+				else{
+					perror("Errore: fork nel caso di backgorund non riuscita\n");
+				}
 			}
 
-			//printf("Errore: exec non riuscita!\n");
-			perror("Errore: exec non riuscita!");
 		}
 		else{
 			printf("Aspetto il figlio (%d)\n", pid);
-			pid = wait(NULL);
+			pid = waitpid(pid, NULL, 0);
 			printf("Figlio (%d) terminato\n", pid);
 		}
 	}
