@@ -61,14 +61,24 @@ int main() {
 			return 0;//exit(0);
 		}
 		else if(pid == 0){
-			execvp(args[0], args);
+
+			pid_t pid1 = fork();
+
+			if (pid1 == 0){
+				//vado a fare la exe
+				execvp(args[0], args);
+			}
+			else if(pid1 > 0){
+				exit();
+			}
+			else{
+				perror("Errore nella creazione del processo nipote\n");
+			}
+
 			//printf("Errore: exec non riuscita!\n");
 			perror("Errore: exec non riuscita!");
 		}
 		else{
-			if(isBackgorund == 1){
-				continue;
-			}
 			printf("Aspetto il figlio (%d)\n", pid);
 			pid = wait(NULL);
 			printf("Figlio (%d) terminato\n", pid);
