@@ -3,6 +3,8 @@
 #include <string.h>
 #include <sys/wait.h>
 #include <stdlib.h>
+#include <sys/types.h>
+#include <fcntl.h>
 
 int main() {
 	char buffer[128];
@@ -11,13 +13,21 @@ int main() {
 	char* args[10];
 	char* token;
 	
+	int isBackgorund;
+	int isRedirected;
+	char* redirect;
+
 	while(1){
 
-		int isBackgorund = 0;
+		isBackgorund = 0;
+		isRedirected = 0;
+		redirect = NULL;
+
 		printf("Shell> ");
 		//scanf("%127s\n", buffer); // scanf non legge l'intera stringa se contiene spazi
 		fflush(stdin);
 		fgets(buffer, 127, stdin);
+		
 		if(buffer[0] == '\n'){continue;}
 		buffer[strlen(buffer) - 1] = '\0'; //terminal char at the end of the buffer
 
@@ -51,10 +61,17 @@ int main() {
 				isBackgorund = 1;
 				args[i] = NULL;
 			}
+			else if(strcmp(args[i], ">")== 0){
+				isRedirected = 1;
+				redirect = args[i+1];
+				args[i+1] = NULL;
+				args[i] = NULL;
+			}
 			i++;
 		}
 		printf("la flag del background è: %d\n", isBackgorund);
-		
+		//printf("SERVE REDIREZIONE: %d\n", isRedirected);
+
 		pid = fork();
 
 		if(pid == -1){
@@ -64,7 +81,19 @@ int main() {
 		else if(pid == 0){
 			//if I don't have the necessity of backgorund I'm going to keep it simple and not create another process
 			if(isBackgorund == 0){
-				execvp(args[0], args);
+
+				if(isRedirected == 1){
+					
+					int fileDescriptor = open(redirect, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
+
+					dup2(fileDescriptor, 1);  //in this way the standardoutput (1) goes to file
+					
+					close(fileDescriptor);
+					execvp(args[0], args);
+				}
+				else{
+					execvp(args[0], args);
+				}
 			}
 
 			else if(isBackgorund == 1){
