@@ -1,0 +1,3 @@
+#ignore all the object files
+*.o
+shell2
