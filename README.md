@@ -1,51 +1,36 @@
-📚 Esercii di Sistemi Operativi
-Questa repository contiene esercizi svolti relativi al corso di Sistemi Operativi, con particolare attenzione alla programmazione concorrente. Gli esercizi trattano i principali meccanismi di sincronizzazione e comunicazione tra processi e thread.
+# 📚 Esercizi di Sistemi Operativi
 
-Contenuti 📂
-Monitor
-Implementazioni di soluzioni a problemi classici (es. produttore-consumatore, lettori-scrittori) utilizzando i monitor.
+Questa repository contiene esercizi svolti relativi al corso di **Sistemi Operativi**, con particolare attenzione alla programmazione concorrente. Gli esercizi trattano i principali meccanismi di sincronizzazione e comunicazione tra processi e thread.
 
-Semafori
-Esempi di utilizzo dei semafori per la sincronizzazione di processi, con applicazioni pratiche a problemi di sincronizzazione.
+## Contenuti 📂
 
-Code di messaggi
-Soluzioni che mostrano come utilizzare le code di messaggi per la comunicazione tra processi.
+- **Monitor**  
+  Implementazioni di soluzioni a problemi classici (es. produttore-consumatore, lettori-scrittori) utilizzando i monitor.
 
-Memoria condivisa
-Esercizi che utilizzano segmenti di memoria condivisa per lo scambio di dati tra processi.
+- **Semafori**  
+  Esempi di utilizzo dei semafori per la sincronizzazione di processi, con applicazioni pratiche a problemi di sincronizzazione.
 
-Thread e mutex
-Gestione della concorrenza tramite thread, mutex e variabili di condizione.
-📚 Esercizi di Sistemi Operativi
-Questa repository contiene esercizi svolti relativi al corso di Sistemi Operativi, con particolare attenzione alla programmazione concorrente. Gli esercizi trattano i principali meccanismi di sincronizzazione e comunicazione tra processi e thread.
+- **Code di messaggi**  
+  Soluzioni che mostrano come utilizzare le code di messaggi per la comunicazione tra processi.
 
-Contenuti 📂
-Monitor
-Implementazioni di soluzioni a problemi classici (es. produttore-consumatore, lettori-scrittori) utilizzando i monitor.
+- **Memoria condivisa**  
+  Esercizi che utilizzano segmenti di memoria condivisa per lo scambio di dati tra processi.
 
-Semafori
-Esempi di utilizzo dei semafori per la sincronizzazione di processi, con applicazioni pratiche a problemi di sincronizzazione.
+- **Thread e mutex**  
+  Gestione della concorrenza tramite thread, mutex e variabili di condizione.
 
-Code di messaggi
-Soluzioni che mostrano come utilizzare le code di messaggi per la comunicazione tra processi.
+- **Problemi classici**  
+  Soluzioni a problemi classici della programmazione concorrente:
+  - Produttore-Consumatore
+  - Lettori-Scrittori
+  - Cena dei Filosofi
+  - Barbiere Addormentato
 
-Memoria condivisa
-Esercizi che utilizzano segmenti di memoria condivisa per lo scambio di dati tra processi.
+## Struttura della Repository 🗂️
 
-Thread e mutex
-Gestione della concorrenza tramite thread, mutex e variabili di condizione.
+La repository è organizzata in directory, una per ciascun esercizio svolto a lezione o a casa
 
-Problemi classici
-Soluzioni a problemi classici della programmazione concorrente:
+Ogni directory contiene:
+- Il codice sorgente degli esercizi (in **C** o altro linguaggio specificato).
+- Un file `README.md` o pdf contenenti le tracce degli esercizi.
 
-Produttore-Consumatore
-Lettori-Scrittori
-Cena dei Filosofi
-Barbiere Addormentato
-Problemi classici
-Soluzioni a problemi classici della programmazione concorrente:
-
-Produttore-Consumatore
-Lettori-Scrittori
-Cena dei Filosofi
-Barbiere Addormentatoz
